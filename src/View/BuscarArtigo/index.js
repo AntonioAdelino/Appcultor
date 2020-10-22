@@ -1,58 +1,87 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect } from "react";
-import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
+import React from "react";
+import { ActivityIndicator, StyleSheet, Text, View, TouchableWithoutFeedback, ToastAndroid } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styles from "./styles";
-import { useState } from "react";
 import ListItem from "../../components/listItem"
 import buscarArtigo from "../../Controllers/ControladorArtigo"
 
-export default function BuscarArtigo({ route, navigation }) {
-  const search = route.params?.searchText;
+let separaTags = (tags) => tags.join(" ");
+
+export default class BuscarArtigo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      carregando: true,
+      artigos: [],
+      erro: null,
+    };
+  }
+
+  // Renomeia o item da lista para "artigo" e navega para a tela artigo com ele
+  navegar(item) {
+    const { navigation } = this.props;
+    const artigo = item;
+    navigation.navigate("Artigo", { artigo });
+
+  }
+  mostrarErro() {
+    return this.state.erro.message
+  }
+
+  render() {
+
+    const { artigos, carregando, erro } = this.state;
+
+    //Carregando
+    if (carregando) {
+      return <ActivityIndicator style={styles.carregando} size="large" color="#ffbe00" />
+    }
+
+    //Tela de erros
+    if (erro) {
+      return (
+        <View style={styles.container}>
+          <Text>
+            Erro ao solicitar artigo:
+            {this.mostrarErro()}
+          </Text>
+        </View>
+      )
+    }
+    //Tela Esperada se nao houver erros
+    return (
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        <FlatList
+          style={styles.flatList}
+          data={artigos}
+          renderItem={({ item }) => (
+            <ListItem title={item.title}
+              tags={`Tags: ${separaTags(item.tags)}`}
+              onPress={() => this.navegar(item)} />
+          )}
+          keyExtractor={(item) => item._id}
+        />
+      </View>
+    );
+
+  }
+
+  componentDidMount() {
+    const { artigos, carregando, erro } = this.state;
+
+    const { route } = this.props;
+    let pesquisa = route.params.searchText;
+
+    console.log(`Termo pesquisado: ${pesquisa}`);
+    buscarArtigo(pesquisa)
+      .then(data => this.setState({ artigos: data, carregando: false }))
+      .catch(erro => this.setState({ erro: erro, carregando: false }))
+    console.log("Artigos " + this.state.artigos)
+
+  }
 
 
-  
-
-  const [articles, setArticles] = useState([]);
-   console.log(articles)
-
-  let dados = buscarArtigo("Ipsum");
-  dados.then(function(lista) {
-    setArticles(lista);
-  });
-
-  useEffect(() =>{
-    buscarArtigo("Ipsum").then(
-      response =>{
-        setArticles(response)
-      }
-    )
-
-  }, [])
-  console.log(articles)
-
-  const itemListTouch = (item) => {
-
-    const receivedObject = item;
-    navigation.navigate("Artigo", { receivedObject });
-    
-  };
-
-  const separaTags = (tags) => tags.join(" ");
-
-  return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <FlatList
-        style={styles.flatList}
-        data={articles}
-        renderItem={({ item }) => (
-          <ListItem title ={item.title} 
-            tags = {`Tags: ${separaTags(item.tags)}`} 
-            onPress={() => itemListTouch(item)}/>
-        )}
-        keyExtractor={(item) => item._id}
-      />
-    </View>
-  );
 }

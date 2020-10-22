@@ -13,10 +13,14 @@ const styles = StyleSheet.create({
     alignContent: "flex-start",
     margin: 3,
   },
-  flatList:{
+  flatList: {
     flex: 1,
     width: "100%",
   },
+  carregando: {
+    flex: 1,
+  }
+  ,
 
   listItem: {
     margin: 10,
@@ -29,7 +33,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  
+
 });
 
 export default styles;
