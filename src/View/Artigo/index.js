@@ -1,24 +1,25 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import styles from "./styles";
 
 export default function Artigo({ route }) {
-  const articleObject = route.params.receivedObject;
+  const artigoRecebido = route.params.artigo;
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      {console.log(articleObject)}
+      {/* {console.log(artigoRecebido)} */}
 
       <Text style={styles.title} id="title">
-        {articleObject.title}
+        {artigoRecebido.title}
       </Text>
 
-      <Text style={styles.article}>{articleObject.content}</Text>
+      <Text style={styles.article}>{artigoRecebido.content}</Text>
 
       <Text style={styles.tags} id="tag">
-        {articleObject.tags}
+        {artigoRecebido.tags}
       </Text>
+
     </View>
   );
 }
