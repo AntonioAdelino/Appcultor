@@ -4,7 +4,7 @@ import { ActivityIndicator, StyleSheet, Text, View, TouchableWithoutFeedback, To
 import { FlatList } from "react-native-gesture-handler";
 import styles from "./styles";
 import ListItem from "../../components/listItem"
-import buscarArtigo from "../../Controllers/ControladorArtigo"
+import buscarArtigo from "../../Controllers/controladorArtigo"
 
 let separaTags = (tags) => tags.join(" ");
 
