@@ -3,6 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./TelaInicial";
 import Artigo from "./Artigo";
 import BuscarArtigo from "./BuscarArtigo";
+import BuscarFlor from "./BuscarFlor";
+import Flor from "./Flor";
 
 const Stack = createStackNavigator();
 
@@ -33,9 +35,17 @@ export default function StackAdmin() {
         options={{
           title: "Artigos",
         }}
-
-
         component={BuscarArtigo} />
+
+      <Stack.Screen name="BuscarFlor"
+        options={{
+          title: "Flores",
+        }}
+        component={BuscarFlor} />
+
+      <Stack.Screen name="Flor"
+        component={Flor}
+      />
     </Stack.Navigator>
   );
 }

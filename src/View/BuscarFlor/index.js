@@ -4,27 +4,27 @@ import { ActivityIndicator, StyleSheet, Text, View, TouchableWithoutFeedback, To
 import { FlatList } from "react-native-gesture-handler";
 import styles from "./styles";
 import ListItem from "../../Components/listItem"
-import buscarArtigo from "../../Controllers/controladorArtigo"
 import buscarFlor from "../../Controllers/controladorFlor"
 
-let separaTags = (tags) => tags.join(" ");
 
-export default class BuscarArtigo extends React.Component {
+let separaTags = (tags) => tags.join(", ");
+
+export default class BuscarFlor extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       carregando: true,
-      artigos: [],
+      flores: [],
       erro: null,
     };
   }
 
-  // Renomeia o item da lista para "artigo" e navega para a tela artigo com ele
+  // Renomeia o item da lista para "flor" e navega para a tela Flor com ele
   navegar(item) {
     const { navigation } = this.props;
-    const artigo = item;
-    navigation.navigate("Artigo", { artigo });
+    const flor = item;
+    navigation.navigate("Flor", { flor });
 
   }
   mostrarErro() {
@@ -33,7 +33,7 @@ export default class BuscarArtigo extends React.Component {
 
   render() {
 
-    const { artigos, carregando, erro } = this.state;
+    const { flores, carregando, erro } = this.state;
 
     //Carregando
     if (carregando) {
@@ -55,12 +55,13 @@ export default class BuscarArtigo extends React.Component {
     return (
       <View style={styles.container}>
         <StatusBar style="auto" />
+
         <FlatList
           style={styles.flatList}
-          data={artigos}
+          data={flores}
           renderItem={({ item }) => (
-            <ListItem title={item.title}
-              tags={`Tags: ${separaTags(item.tags)}`}
+            <ListItem title={item.scientificName}
+              tags={`Nomes populares: ${separaTags(item.names)}`}
               onPress={() => this.navegar(item)} />
           )}
           keyExtractor={(item) => item._id}
@@ -71,15 +72,16 @@ export default class BuscarArtigo extends React.Component {
   }
 
   componentDidMount() {
-    const { artigos, carregando, erro } = this.state;
+    const { flores, carregando, erro } = this.state;
 
     const { route } = this.props;
     let pesquisa = route.params.textoProcurado;
-
     console.log(`Termo pesquisado: ${pesquisa}`);
 
-    buscarArtigo(pesquisa)
-      .then(data => this.setState({ artigos: data, carregando: false }))
+
+
+    buscarFlor(pesquisa)
+      .then(data => this.setState({ flores: data, carregando: false }))
       .catch(erro => this.setState({ erro: erro, carregando: false }))
 
   }

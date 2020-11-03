@@ -2,21 +2,28 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    padding: 2,
     flex: 1,
     width: "100%",
-    flexDirection: "row",
+    flexDirection: "column",
     backgroundColor: "#fff",
     alignItems: "center",
-    flexWrap: "wrap",
-    justifyContent: "center",
+    flexWrap: "nowrap",
+    justifyContent: "flex-start",
   },
-  text: {
-    color: "#fff",
-  },
+  // imgBackground: {
+  //   width: '100%',
+  //   height: '100%',
+  //   flex: 1
+  // },
+  // text: {
+  //   color: "#fff",
+  // },
   textInput: {
     paddingHorizontal: 7,
-    margin: 5,
+    marginStart: 2,
+    marginEnd: 2,
+    marginTop: 6,
+    marginBottom: 6,
     width: "95%",
     height: 40,
     flexWrap: "nowrap",
@@ -24,29 +31,37 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   button: {
-    marginStart: 2,
-    height: 40,
-    width: 75,
+    marginHorizontal: 4,
+    marginVertical: 5,
+    paddingHorizontal: 5,
+    paddingVertical: 10,
+    flex: 2,
+    maxWidth: 150,
+    maxHeight: 40,
+
+    flexDirection: "row",
+
     borderRadius: 10,
-    flexWrap: "nowrap",
+    flexWrap: "wrap",
+
     backgroundColor: "#f7b20d",
     justifyContent: "center",
-    alignItems: "center"
+    alignContent: "center"
 
   },
   buttonContainer: {
-    marginHorizontal: 7,
     flex: 1,
-    flexWrap: "nowrap",
-    alignContent: "flex-end",
+    flexWrap: "wrap",
     alignSelf: "flex-end",
-    alignItems: "flex-end",
-    margin: 2,
-    padding: 2,
+    alignItems: "center",
+    marginEnd: 2
+
   },
-  button_text: {
+  buttonText: {
+
     color: "#fff",
   },
+
 
 });
 
