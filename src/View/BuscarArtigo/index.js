@@ -1,11 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { ActivityIndicator, StyleSheet, Text, View, TouchableWithoutFeedback, ToastAndroid } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styles from "./styles";
 import ListItem from "../../Components/listItem"
 import buscarArtigo from "../../Controllers/controladorArtigo"
-import buscarFlor from "../../Controllers/controladorFlor"
 
 let separaTags = (tags) => tags.join(" ");
 
@@ -60,6 +59,7 @@ export default class BuscarArtigo extends React.Component {
           data={artigos}
           renderItem={({ item }) => (
             <ListItem title={item.title}
+              imagem={require("../../../assets/iconeAbelha.png")}
               preview={item.content}
               tags={`Tags: ${separaTags(item.tags)}`}
               onPress={() => this.navegar(item)} />
@@ -76,8 +76,6 @@ export default class BuscarArtigo extends React.Component {
 
     const { route } = this.props;
     let pesquisa = route.params.textoProcurado;
-
-    console.log(`Termo pesquisado: ${pesquisa}`);
 
     buscarArtigo(pesquisa)
       .then(data => this.setState({ artigos: data, carregando: false }))

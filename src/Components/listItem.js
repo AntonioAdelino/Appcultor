@@ -52,16 +52,18 @@ const styles = StyleSheet.create({
   }
 });
 
-const ListItem = ({ onPress, title, tags, preview, ...props }) => (
+const ListItem = ({ onPress, title, tags, preview, imagem, ...props }) => (
   <TouchableOpacity onPress={onPress} style={styles.principal}>
-    <Image style={styles.logo} source={require('../../assets/iconeAbelha.png')} />
+    <Image
+      style={styles.logo}
+      source={imagem} />
     <View style={styles.Artigo}>
       <Text style={styles.title}>{title}</Text>
       <Text numberOfLines={2} style={styles.preview}>{preview}</Text>
       <Text style={styles.tags}>{tags}</Text>
     </View>
   </TouchableOpacity>
-
 );
+
 
 export default ListItem;

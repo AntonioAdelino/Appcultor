@@ -61,6 +61,7 @@ export default class BuscarFlor extends React.Component {
           data={flores}
           renderItem={({ item }) => (
             <ListItem title={item.scientificName}
+              imagem={{ uri: 'http://chaves.rcpol.org.br/resized/eco-0B0nUXAibCfVGaG16V25lelljMHM.jpeg' }}
               tags={`Nomes populares: ${separaTags(item.names)}`}
               onPress={() => this.navegar(item)} />
           )}
