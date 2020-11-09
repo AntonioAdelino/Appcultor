@@ -1,55 +1,60 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Text, View, TextInput, ImageBackground } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ImageBackground } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
+import MenuItem from "../../Components/menuItem";
+import BarraDeBusca from "../../Components/barraDeBusca";
+import itensMenu from "./itensMenu"
 import styles from "./styles";
 
 export default function TelaInicial({ navigation }) {
   const [searchText, onChangeText] = React.useState("");
 
-  let buscar = (texto, tipo) => {
+  //Cuida das buscas
+
+  const buscar = (texto, tipo) => {
     let tipoDeBusca = tipo;
     let textoProcurado = texto;
-    if (tipoDeBusca === "Artigo") { navigation.navigate("BuscarArtigo", { textoProcurado }) }
-    else {
-      navigation.navigate("BuscarFlor", { textoProcurado })
-    }
+    navigation.navigate("BuscarArtigo", { textoProcurado })
 
   }
 
+  //Cuida da navegação pelos icones
+  const navegar = (tag) => {
+    console.log(tag)
+    if (tag === "Flora apícola") {
+      navigation.navigate("BuscarFlor")
+    } else {
+      navigation.navigate("BuscarArtigo", { tag })
+    }
+  }
 
   return (
-    <ImageBackground source={require('../../../assets/abelha.png')} style={styles.container}>
-
-      <TextInput
-        style={styles.textInput}
+    <ImageBackground source={require('../../../assets/abelha2.png')} style={styles.container}>
+      <BarraDeBusca
         onChangeText={(text) => onChangeText(text)}
         placeholder="Faça sua busca aqui"
         value={searchText}
+        botao={() =>
+          buscar(searchText, "Artigo")}
       />
       <StatusBar style="auto" />
-      <View style={styles.buttonContainer}>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            buscar(searchText, "Artigo")
-            // navigation.navigate("BuscarArtigo", { searchText, tipoDeBusca = "Artigo" })
-          }
-        >
-          <Text style={styles.buttonText}>Buscar Artigo</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            buscar(searchText, "Flor")
-          }>
-          <Text style={styles.buttonText}>Buscar Flor</Text>
-        </TouchableOpacity>
-
-      </View>
+      <FlatList
+        style={styles.flatList}
+        contentContainerStyle={
+          styles.flatListContainer
+        }
+        columnWrapperStyle={{ alignContent: "space-around" }}
+        data={itensMenu}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <MenuItem titulo={item.titulo}
+            icone={item.icone}
+            onPress={() => navegar(item.tag)} />
+        )}
+        keyExtractor={(item) => item.titulo}
+      />
 
     </ImageBackground >
 

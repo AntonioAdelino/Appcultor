@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
+import BarraDeBusca from "../../Components/barraDeBusca";
 import styles from "./styles";
 import ListItem from "../../Components/listItem"
 import buscarArtigo from "../../Controllers/controladorArtigo"
@@ -53,7 +54,9 @@ export default class BuscarArtigo extends React.Component {
     //Tela Esperada se nao houver erros
     return (
       <View style={styles.container}>
-        <StatusBar style="auto" />
+        <StatusBar style="auto" title={this.props.tag} />
+        <BarraDeBusca
+          placeholder="Buscar artigo" />
         <FlatList
           style={styles.flatList}
           data={artigos}
@@ -76,10 +79,20 @@ export default class BuscarArtigo extends React.Component {
 
     const { route } = this.props;
     let pesquisa = route.params.textoProcurado;
+    let tag = route.params.tag;
+    if (tag !== null && tag !== undefined) {
+      console.log("Tag = ", tag)
+      buscarArtigo(tag, "buscaPorTag")
+        .then(data => this.setState({ artigos: data, carregando: false }))
+        .catch(erro => this.setState({ erro: erro, carregando: false }))
+    } else {
+      console.log("TAg nula")
+      buscarArtigo(pesquisa, "busca")
+        .then(data => this.setState({ artigos: data, carregando: false }))
+        .catch(erro => this.setState({ erro: erro, carregando: false }))
 
-    buscarArtigo(pesquisa)
-      .then(data => this.setState({ artigos: data, carregando: false }))
-      .catch(erro => this.setState({ erro: erro, carregando: false }))
+    }
+
 
   }
 

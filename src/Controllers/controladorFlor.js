@@ -1,8 +1,20 @@
-import { ToastAndroid } from "react-native"
+export default async function buscarFlor(texto, operacao) {
 
-export default async function buscarFlor(texto) {
+    let busca = texto;
+    let op = ""
 
-    return fetch("http://173.82.232.87:3001/api/flower/searchFlower?text=" + texto)
+    let buscarFlor = "searchFlower?text=" + busca
+
+    if (operacao !== "inicial") {
+
+        op = buscarFlor + busca
+    }
+
+
+    let raiz = "http://173.82.232.87:3001/api/flower/";
+
+    //pesquisa de acordo com a raiz e operação escolhida
+    return fetch(raiz + op)
         .then(response => {
             // valida se a requisição falhou
             if (!response.ok) {
@@ -18,8 +30,5 @@ export default async function buscarFlor(texto) {
             return response.json()
         })
 
-
-    // Comando usado para implementação inicial
-    //.then(res => res.json())
 
 }

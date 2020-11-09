@@ -1,7 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { ActivityIndicator, StyleSheet, Text, View, TouchableWithoutFeedback, ToastAndroid } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
+import BarraDeBusca from "../../Components/barraDeBusca";
 import styles from "./styles";
 import ListItem from "../../Components/listItem"
 import buscarFlor from "../../Controllers/controladorFlor"
@@ -56,6 +57,9 @@ export default class BuscarFlor extends React.Component {
       <View style={styles.container}>
         <StatusBar style="auto" />
 
+        <BarraDeBusca
+          placeholder="Buscar Flor" />
+
         <FlatList
           style={styles.flatList}
           data={flores}
@@ -76,12 +80,12 @@ export default class BuscarFlor extends React.Component {
     const { flores, carregando, erro } = this.state;
 
     const { route } = this.props;
-    let pesquisa = route.params.textoProcurado;
+    let pesquisa = route.params?.textoProcurado;
     console.log(`Termo pesquisado: ${pesquisa}`);
 
 
 
-    buscarFlor(pesquisa)
+    buscarFlor(pesquisa, "inicial")
       .then(data => this.setState({ flores: data, carregando: false }))
       .catch(erro => this.setState({ erro: erro, carregando: false }))
 

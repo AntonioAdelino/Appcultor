@@ -1,11 +1,34 @@
-import { ToastAndroid } from "react-native"
+export default async function buscarArtigo(texto, operacao) {
+    /*
+    * Controller para tratamento solicitações ao server relacionadas aos artigos.
+    * IP Server =   173.82.232.87
+    * Porta 3001
+    */
 
-export default async function buscarArtigo(texto) {
 
-    return fetch("http://173.82.232.87:3001/api/article/searchArticle?text=" + texto)
+    let op = "";
+
+    let buscarArtigo = "searchArticle?text=" + texto;
+    let buscarTag = "?tags=" + texto;
+
+    if (operacao === "busca") {
+        op = buscarArtigo;
+    } else {
+        op = buscarTag;
+    }
+
+
+    let raiz = "http://173.82.232.87:3001/api/article/";
+
+    let final = raiz + op;
+
+    //pesquisa de acordo com a raiz e operação escolhida
+    console.log("Fetch: ", final)
+    return fetch(final)
         .then(response => {
             // valida se a requisição falhou
             if (!response.ok) {
+                console.log(response.body)
                 return new Error('falhou a requisição') // cairá no catch da promise
             }
 
@@ -18,8 +41,5 @@ export default async function buscarArtigo(texto) {
             return response.json()
         })
 
-
-    // Comando usado para implementação inicial
-    //.then(res => res.json())
 
 }
