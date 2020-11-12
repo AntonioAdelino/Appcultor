@@ -1,30 +1,40 @@
-export default async function buscarArtigo(texto, operacao) {
+export default async function buscarArtigo(texto, tag) {
     /*
     * Controller para tratamento solicitações ao server relacionadas aos artigos.
     * IP Server =   173.82.232.87
     * Porta 3001
     */
 
+    console.log(`${texto} - ${tag}`)
+    if (texto == null && tag != null) {
+        return await buscarPorTag(tag)
 
-    let op = "";
+    } else if (texto != null && tag == null) {
+        return await buscarPorTexto(texto)
 
-    let buscarArtigo = "searchArticle?text=" + texto;
-    let buscarTag = "?tags=" + texto;
+    } else if (texto != null && tag != null) {
+        /**
+         * Faz a busca na API usando a tag
+         * Faz a filtragem local com o parametro recebido no texto
+         * Retorna o resultado da busca dentro de uma tag
+        */
+        const data = await buscarPorTag(tag);
+        const search = texto;
+        const result = data.filter(obj => {
+            return obj.title.match(new RegExp(`${search}`)) || (obj.tags.filter(tag => { return tag.match(search) }).length > 0);
+        })
+        console.log(result)
+        return result
 
-    if (operacao === "busca") {
-        op = buscarArtigo;
-    } else {
-        op = buscarTag;
     }
 
+}
+//Ip para teste Local
+const raiz = "http://192.168.1.4:3001/api/article/";
 
-    let raiz = "http://173.82.232.87:3001/api/article/";
 
-    let final = raiz + op;
-
-    //pesquisa de acordo com a raiz e operação escolhida
-    console.log("Fetch: ", final)
-    return fetch(final)
+async function buscarPorTexto(texto) {
+    return fetch(raiz + "searchArticle?text=" + texto)
         .then(response => {
             // valida se a requisição falhou
             if (!response.ok) {
@@ -41,5 +51,25 @@ export default async function buscarArtigo(texto, operacao) {
             return response.json()
         })
 
+}
+
+async function buscarPorTag(tag) {
+
+    return fetch(raiz + "?tags=" + tag)
+        .then(response => {
+            // valida se a requisição falhou
+            if (!response.ok) {
+                console.log(response.body)
+                return new Error('falhou a requisição') // cairá no catch da promise
+            }
+
+            // verificando pelo status
+            if (response.status === 404) {
+                return new Error('não encontrou qualquer resultado')
+            }
+
+            // retorna uma promise com os dados em JSON
+            return response.json()
+        })
 
 }

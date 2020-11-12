@@ -7,17 +7,21 @@ import styles from "./styles";
 import ListItem from "../../Components/listItem"
 import buscarArtigo from "../../Controllers/controladorArtigo"
 
-let separaTags = (tags) => tags.join(" ");
+let separaTags = (tags) => tags.join(", ");
 
 export default class BuscarArtigo extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      textoProcurado: this.props.route.params.textoProcurado,
       carregando: true,
       artigos: [],
       erro: null,
     };
+    //Bind necessário para possibilitar que a função altere o estado do componente
+    this.mudarTexto = this.mudarTexto.bind(this)
+
   }
 
   // Renomeia o item da lista para "artigo" e navega para a tela artigo com ele
@@ -30,6 +34,41 @@ export default class BuscarArtigo extends React.Component {
   mostrarErro() {
     return this.state.erro.message
   }
+
+  //Precisa de um bind para poder acessa e alterar o estato do componente e alterar ele.
+  mudarTexto(texto) {
+    this.setState({ textoProcurado: texto })
+  }
+
+
+  /* 
+    Acessa o estado e o parametro da tag passada da tela inicial, e então chama o controlador
+  */
+  buscarNaApi() {
+    const { artigos, textoProcurado, carregando, erro } = this.state;
+
+    const { route } = this.props;
+    const pesquisa = textoProcurado;
+    const tag = route.params.tag;
+
+    this.setState({ carregando: true, artigos: [] })
+
+    buscarArtigo(pesquisa, tag)
+      .then(data => this.setState({ artigos: data, carregando: false }))
+      .catch(erro => this.setState({ erro: erro, carregando: false }))
+
+  }
+  /**
+   * Metodo Do Ciclo de vida do Componente
+   * Ele é chamado logo após a criação do componente.
+   * Requisições a Api devem ser realizadas neste método
+  */
+
+  componentDidMount() {
+    this.buscarNaApi()
+
+  }
+
 
   render() {
 
@@ -56,7 +95,11 @@ export default class BuscarArtigo extends React.Component {
       <View style={styles.container}>
         <StatusBar style="auto" title={this.props.tag} />
         <BarraDeBusca
-          placeholder="Buscar artigo" />
+          placeholder="Buscar artigo"
+          onChangeText={this.mudarTexto}
+          value={this.state.textoProcurado}
+          botao={() =>
+            this.buscarNaApi()} />
         <FlatList
           style={styles.flatList}
           data={artigos}
@@ -74,27 +117,6 @@ export default class BuscarArtigo extends React.Component {
 
   }
 
-  componentDidMount() {
-    const { artigos, carregando, erro } = this.state;
-
-    const { route } = this.props;
-    let pesquisa = route.params.textoProcurado;
-    let tag = route.params.tag;
-    if (tag !== null && tag !== undefined) {
-      console.log("Tag = ", tag)
-      buscarArtigo(tag, "buscaPorTag")
-        .then(data => this.setState({ artigos: data, carregando: false }))
-        .catch(erro => this.setState({ erro: erro, carregando: false }))
-    } else {
-      console.log("TAg nula")
-      buscarArtigo(pesquisa, "busca")
-        .then(data => this.setState({ artigos: data, carregando: false }))
-        .catch(erro => this.setState({ erro: erro, carregando: false }))
-
-    }
-
-
-  }
 
 
 }
