@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   article: {
     flex: 4,
     textAlign: "justify",
-    fontSize: 18,
+    fontSize: 16,
     lineHeight: 24,
     paddingHorizontal: 2,
     margin: 30,
