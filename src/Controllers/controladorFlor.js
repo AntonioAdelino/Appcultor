@@ -1,20 +1,44 @@
-export default async function buscarFlor(texto, operacao) {
+const raiz = "http://192.168.1.4:3001/api/flower/";
 
-    let busca = texto;
-    let op = ""
+export default async function buscarFlor(texto) {
+    /**
+     * Se há um texto recebido, a busca é efetuada e retornada
+     * Se não há, é retornada a listagem de todas as flores
+    */
 
-    let buscarFlor = "searchFlower?text=" + busca
-
-    if (operacao !== "inicial") {
-
-        op = buscarFlor + busca
+    if (texto == null) {
+        return await listarTodas();
+    } else {
+        return await buscarNaApi(texto)
     }
 
 
-    let raiz = "http://173.82.232.87:3001/api/flower/";
+}
 
-    //pesquisa de acordo com a raiz e operação escolhida
-    return fetch(raiz + op)
+async function listarTodas() {
+    return fetch(raiz)
+        .then(response => {
+            // valida se a requisição falhou
+            if (!response.ok) {
+                return new Error('falhou a requisição') // cairá no catch da promise
+            }
+
+            // verificando pelo status
+            if (response.status === 404) {
+                return new Error('não encontrou qualquer resultado')
+            }
+
+            // retorna uma promise com os dados em JSON
+            return response.json()
+        })
+
+}
+
+
+async function buscarNaApi(texto) {
+    const busca = raiz + "searchFlower?text=" + texto
+
+    return fetch(busca)
         .then(response => {
             // valida se a requisição falhou
             if (!response.ok) {
