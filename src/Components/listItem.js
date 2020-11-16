@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 60,
     height: 60,
+    borderRadius: 30,
     flexWrap: "wrap",
     marginTop: 10,
     marginHorizontal: 15
@@ -45,6 +46,13 @@ const styles = StyleSheet.create({
     marginBottom: 5,
 
   },
+  scientificName: {
+    fontSize: 10,
+    color: "#4e4e4e",
+    marginBottom: 5,
+    fontStyle: "italic"
+
+  },
   tags: {
     fontSize: 10,
     fontWeight: "bold",
@@ -52,18 +60,60 @@ const styles = StyleSheet.create({
   }
 });
 
-const ListItem = ({ onPress, title, tags, preview, imagem, ...props }) => (
-  <TouchableOpacity onPress={onPress} style={styles.principal}>
-    <Image
-      style={styles.logo}
-      source={imagem} />
-    <View style={styles.Artigo}>
-      <Text style={styles.title}>{title}</Text>
-      <Text numberOfLines={2} style={styles.preview}>{preview}</Text>
-      <Text style={styles.tags}>{tags}</Text>
-    </View>
-  </TouchableOpacity>
-);
+
+export default class ListItem extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  validarImagem() {
+    if (this.props.imagem == null) {
+
+      return require("../../assets/iconeAbelha.png");
+    } else {
+
+      return this.props.imagem;
+    }
+
+  }
+
+  render() {
+    const imagem = this.validarImagem()
+
+    if (this.props.type === "flor") {
+
+      return (
+        <TouchableOpacity onPress={this.props.onPress} style={styles.principal}>
+          <Image
+            style={styles.logo}
+            source={imagem} />
+          <View style={styles.Artigo}>
+            <Text style={styles.title}>{this.props.title}</Text>
+            <Text numberOfLines={2} style={styles.scientificName}>{this.props.preview}</Text>
+            <Text style={styles.tags}>{this.props.tags}</Text>
+          </View>
+        </TouchableOpacity>
+      )
+
+    } else {
+
+      return (
+        <TouchableOpacity onPress={this.props.onPress} style={styles.principal}>
+          <Image
+            style={styles.logo}
+            source={imagem} />
+          <View style={styles.Artigo}>
+            <Text style={styles.title}>{this.props.title}</Text>
+            <Text numberOfLines={2} style={styles.preview}>{this.props.preview}</Text>
+            <Text style={styles.tags}>{this.props.tags}</Text>
+          </View>
+        </TouchableOpacity>
+
+      )
+
+    }
 
 
-export default ListItem;
+  }
+
+}

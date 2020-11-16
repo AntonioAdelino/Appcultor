@@ -105,7 +105,7 @@ export default class BuscarArtigo extends React.Component {
           data={artigos}
           renderItem={({ item }) => (
             <ListItem title={item.title}
-              imagem={require("../../../assets/iconeAbelha.png")}
+              type="artigo"
               preview={item.content}
               tags={`Tags: ${separaTags(item.tags)}`}
               onPress={() => this.navegar(item)} />
