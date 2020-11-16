@@ -28,31 +28,11 @@ const styles = StyleSheet.create({
     }
 
 });
-// export default class MenuItem extends React.Component {
-//     constructor(props) {
-//         super(props)
-//         console.log(props)
-
-//     }
-
-//     render() {
-//         console.log(this.props)
-//         return (
-//             <TouchableOpacity onPress={this.onPress} style={styles.principal}>
-//                 <Image style={styles.logo} source={this.props.icone} />
-//                 <Text style={styles.titulo} >{this.props.titulo} </Text>
-
-//             </TouchableOpacity>
-//         )
-
-//     }
-
-// }
 const MenuItem = ({ onPress, titulo, icone, ...props }) => (
     <TouchableOpacity onPress={onPress} style={styles.principal}>
         <Image style={styles.logo}
             resizeMode="contain"
-            source={icone} />
+            source={{ uri: icone }} />
         <Text style={styles.titulo} >{titulo} </Text>
     </TouchableOpacity>
 );

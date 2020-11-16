@@ -1,44 +1,44 @@
 const itensMenu = [
     {
-        titulo: "Passando a limpo",
+        title: "Passando a limpo",
         tag: "Passando a limpo",
-        icone: require("../../../assets/PassandoALimpo.png")
+        image: require("../../../assets/PassandoALimpo.png")
     },
     {
-        titulo: "Produtos apícolas",
+        title: "Produtos apícolas",
         tag: "Produtos apícolas",
-        icone: require("../../../assets/ProdutosApícolas.png")
+        image: require("../../../assets/ProdutosApícolas.png")
 
     },
     {
-        titulo: "Monte seu apiário ",
+        title: "Monte seu apiário ",
         tag: "Monte seu apiário",
-        icone: require("../../../assets/MonteSeuApiário.png")
+        image: require("../../../assets/MonteSeuApiário.png")
     },
     {
-        titulo: "Flora apícola",
+        title: "Flora apícola",
         tag: "Flora apícola",
-        icone: require("../../../assets/FloraApícola.png")
+        image: require("../../../assets/FloraApícola.png")
     },
     {
-        titulo: "Técnicas de manejo",
+        title: "Técnicas de manejo",
         tag: "Técnicas de manejo",
-        icone: require("../../../assets/TécnicasDeManejo.png")
+        image: require("../../../assets/TécnicasDeManejo.png")
     },
     {
-        titulo: "Solucionando problemas",
+        title: "Solucionando problemas",
         tag: "Solucionando problemas",
-        icone: require("../../../assets/SolucionandoProblemas.png")
+        image: require("../../../assets/SolucionandoProblemas.png")
     },
     {
-        titulo: "Glossário",
+        title: "Glossário",
         tag: "Glossário",
-        icone: require("../../../assets/Glossário.png")
+        image: require("../../../assets/Glossário.png")
     },
     {
-        titulo: "Curiosidades",
+        title: "Curiosidades",
         tag: "Curiosidades",
-        icone: require("../../../assets/Curiosidades.png")
+        image: require("../../../assets/Curiosidades.png")
     },
 
 ]
