@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { ImageBackground, ActivityIndicator, View, Text } from "react-native";
+import { ImageBackground, ActivityIndicator, View, Text, ToastAndroid } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import MenuItem from "../../Components/menuItem";
 import BarraDeBusca from "../../Components/barraDeBusca";
 import carregarMenu from "../../Controllers/controladorMenuInicial";
 import styles from "./styles";
+import TelaDeErro from "../TelaDeErro"
 
 export default class TelaInicial extends React.Component {
   constructor(props) {
@@ -93,12 +94,7 @@ export default class TelaInicial extends React.Component {
     //Tela de erros
     if (erro) {
       return (
-        <View style={styles.container}>
-          <Text>
-            Erro ao solicitar artigo:
-            {this.mostrarErro()}
-          </Text>
-        </View>
+        TelaDeErro(this.mostrarErro())
       )
     }
 

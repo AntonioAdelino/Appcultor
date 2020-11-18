@@ -6,7 +6,7 @@ import BarraDeBusca from "../../Components/barraDeBusca";
 import styles from "./styles";
 import ListItem from "../../Components/listItem"
 import buscarFlor from "../../Controllers/controladorFlor"
-
+import TelaDeErro from "../TelaDeErro"
 
 let separaTags = (tags) => tags.join(", ");
 
@@ -52,6 +52,8 @@ export default class BuscarFlor extends React.Component {
     const { route } = this.props;
     let pesquisa = textoProcurado;
 
+    console.log("Busca")
+
     buscarFlor(pesquisa)
       .then(data => this.setState({ flores: data, carregando: false }))
       .catch(erro => this.setState({ erro: erro, carregando: false }))
@@ -95,13 +97,36 @@ export default class BuscarFlor extends React.Component {
     //Tela de erros
     if (erro) {
       return (
-        <View style={styles.container}>
-          <Text>
-            Erro ao solicitar artigo:
-            {this.mostrarErro()}
-          </Text>
-        </View>
+        <TelaDeErro
+          //A tela de erro recebe um erro ou true para saber q está lidando com um problema
+          // Passando, false ou ignorando o parametro fará com q n seja exibido um botão para chamar a função.
+          erro={erro}
+          mensagem="Erro! Verifique sua conexão com a internet e tente novamente"
+          mensagemBotao="Tentar novamente"
+          botao={() => { this.buscarNaApi() }} />
       )
+    }
+
+
+
+    let resultadoDaBusca;
+    if (flores.length == 0) {
+      resultadoDaBusca = <TelaDeErro mensagem={"Nenhuma flor encontrada\nVerifique sua busca e tente novamente"} />
+    } else {
+      resultadoDaBusca =
+        <FlatList
+          style={styles.flatList}
+          data={flores}
+          renderItem={({ item }) => (
+            <ListItem title={`${separaTags(item.names)}`}
+              type="flor"
+              imagem={{ uri: 'http://chaves.rcpol.org.br/resized/eco-0B0nUXAibCfVGaG16V25lelljMHM.jpeg' }}
+              preview={item.scientificName}
+              tags={`Recursos Florais: ${separaTags(item.flowerResources)}`}
+              onPress={() => this.navegar(item)} />
+          )}
+          keyExtractor={(item) => item._id}
+        />
     }
 
     //Tela Pincipal
@@ -116,19 +141,8 @@ export default class BuscarFlor extends React.Component {
           botao={() =>
             this.buscarNaApi()} />
 
-        <FlatList
-          style={styles.flatList}
-          data={flores}
-          renderItem={({ item }) => (
-            <ListItem title={`${separaTags(item.names)}`}
-              type="flor"
-              imagem={{ uri: 'http://chaves.rcpol.org.br/resized/eco-0B0nUXAibCfVGaG16V25lelljMHM.jpeg' }}
-              preview={item.scientificName}
-              tags={`Recursos Florais: ${separaTags(item.flowerResources)}`}
-              onPress={() => this.navegar(item)} />
-          )}
-          keyExtractor={(item) => item._id}
-        />
+        {resultadoDaBusca}
+
       </View>
     );
 

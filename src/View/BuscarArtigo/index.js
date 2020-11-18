@@ -6,6 +6,7 @@ import BarraDeBusca from "../../Components/barraDeBusca";
 import styles from "./styles";
 import ListItem from "../../Components/listItem"
 import buscarArtigo from "../../Controllers/controladorArtigo"
+import TelaDeErro from "../TelaDeErro";
 
 let separaTags = (tags) => tags.join(", ");
 
@@ -24,6 +25,12 @@ export default class BuscarArtigo extends React.Component {
 
   }
 
+  /************************************************************************************
+   * Navegação
+   * **********************************************************************************
+  */
+
+
   // Renomeia o item da lista para "artigo" e navega para a tela artigo com ele
   navegar(item) {
     const { navigation } = this.props;
@@ -31,15 +38,17 @@ export default class BuscarArtigo extends React.Component {
     navigation.navigate("Artigo", { artigo });
 
   }
-  mostrarErro() {
-    return this.state.erro.message
-  }
 
-  //Precisa de um bind para poder acessa e alterar o estato do componente e alterar ele.
-  mudarTexto(texto) {
-    this.setState({ textoProcurado: texto })
-  }
 
+  /************************************************************************************
+   * Estados do Componente / Solicitações API
+   * **********************************************************************************
+  */
+
+  componentDidMount() {
+    this.buscarNaApi()
+
+  }
 
   /* 
     Acessa o estado e o parametro da tag passada da tela inicial, e então chama o controlador
@@ -58,17 +67,22 @@ export default class BuscarArtigo extends React.Component {
       .catch(erro => this.setState({ erro: erro, carregando: false }))
 
   }
-  /**
-   * Metodo Do Ciclo de vida do Componente
-   * Ele é chamado logo após a criação do componente.
-   * Requisições a Api devem ser realizadas neste método
-  */
 
-  componentDidMount() {
-    this.buscarNaApi()
-
+  //Precisa de um bind para poder acessa e alterar o estato do componente e alterar ele.
+  mudarTexto(texto) {
+    this.setState({ textoProcurado: texto })
   }
 
+  mostrarErro() {
+    return this.state.erro.message
+  }
+
+
+
+  /************************************************************************************
+   *  Telas
+   * **********************************************************************************
+   */
 
   render() {
 
@@ -82,24 +96,26 @@ export default class BuscarArtigo extends React.Component {
     //Tela de erros
     if (erro) {
       return (
-        <View style={styles.container}>
-          <Text>
-            Erro ao solicitar artigo:
-            {this.mostrarErro()}
-          </Text>
-        </View>
+        <TelaDeErro
+          //A tela de erro recebe um erro ou true para saber q está lidando com um problema
+          // Passando, false ou ignorando o parametro fará com q n seja exibido um botão para chamar a função.
+          erro={erro}
+          mensagem="Erro! Verifique sua conexão com a internet e tente novamente"
+          mensagemBotao="Tentar novamente"
+          botao={() => { this.buscarNaApi() }} />
       )
     }
-    //Tela Esperada se nao houver erros
-    return (
-      <View style={styles.container}>
-        <StatusBar style="auto" title={this.props.tag} />
-        <BarraDeBusca
-          placeholder="Buscar artigo"
-          onChangeText={this.mudarTexto}
-          value={this.state.textoProcurado}
-          botao={() =>
-            this.buscarNaApi()} />
+    /************************************************************************************
+   *  Tela Principal
+   * **********************************************************************************
+   */
+
+    let resultadoDaBusca;
+    if (artigos.length == 0) {
+      resultadoDaBusca = <TelaDeErro mensagem={"Nenhum resultado, \nVerifique sua busca"} />
+
+    } else {
+      resultadoDaBusca =
         <FlatList
           style={styles.flatList}
           data={artigos}
@@ -111,7 +127,21 @@ export default class BuscarArtigo extends React.Component {
               onPress={() => this.navegar(item)} />
           )}
           keyExtractor={(item) => item._id}
-        />
+        />;
+    }
+
+    return (
+      <View style={styles.container}>
+        <StatusBar style="auto" title={this.props.tag} />
+        <BarraDeBusca
+          placeholder="Buscar artigo"
+          onChangeText={this.mudarTexto}
+          value={this.state.textoProcurado}
+          botao={() =>
+            this.buscarNaApi()} />
+
+        {resultadoDaBusca}
+
       </View>
     );
 
