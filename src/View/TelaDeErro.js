@@ -11,36 +11,37 @@ const styles = StyleSheet.create({
 
     },
     texto: {
-        color: "#000",
+        color: "#4e4e4e",
         fontSize: 18,
         textAlign: "center",
-        marginHorizontal: 8,
-        marginVertical: 8
+        marginHorizontal: 14,
+        marginTop: 10,
+        marginBottom: 12
 
     },
     imagem: {
         flex: 1,
         flexBasis: 150,
-        maxWidth: 275,
-        maxHeight: 275,
-
-
+        maxWidth: 200,
+        maxHeight: 200,
         flexWrap: "wrap",
     },
     botao: {
         flex: 1,
         backgroundColor: "#ffbe00",
         justifyContent: "center",
-        maxWidth: 300,
-        maxHeight: 60,
+        marginTop: 30,
+        maxWidth: 200,
+        maxHeight: 45,
+        elevation: 6
 
     },
     textoBotao: {
         flex: 0,
-        fontSize: 20,
+        fontSize: 16,
         flexDirection: "row",
         color: "#fff",
-        width: 250,
+        width: 150,
         textAlign: "center"
 
 
