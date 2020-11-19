@@ -14,6 +14,7 @@ export default function StackAdmin() {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#f7b20d',
+          elevation: 0
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
