@@ -23,14 +23,13 @@ export default async function buscarArtigo(texto, tag) {
         const result = data.filter(obj => {
             return obj.title.match(new RegExp(`${search}`)) || (obj.tags.filter(tag => { return tag.match(search) }).length > 0);
         })
-        console.log(result)
         return result
 
     }
 
 }
 //Ip para teste Local
-const raiz = "http://192.168.1.4:3001/api/article/";
+const raiz = "http://173.82.232.87:3001/api/article/";
 
 
 async function buscarPorTexto(texto) {

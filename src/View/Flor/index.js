@@ -1,60 +1,69 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Image, Text, View, ScrollView } from "react-native";
+import { Text, View } from "react-native";
+import { FlatListSlider } from 'react-native-flatlist-slider';
 import styles from "./styles";
 
 let separaArray = (nomes) => nomes.join(", ");
 
 export default function Flor({ route }) {
   const florRecebida = route.params.flor;
-  console.log(florRecebida)
+  const images = florRecebida.images.map(imagem => ({ key: imagem, image: imagem }));
 
+  let imagens;
+
+  if (images.length > 0) {
+    imagens = <FlatListSlider
+      data={images}
+      imageKey={images.key}
+      height={200}
+      timer={5000}
+      local={false}
+      onPress={item => console.log(item)}
+      contentContainerStyle={{ paddingHorizontal: 0, flex: 0 }}
+      indicatorContainerStyle={{ marginBottom: 15 }}
+      indicatorActiveColor={'#ffbe00'}
+      indicatorInActiveColor={'#000'}
+      indicatorActiveWidth={30}
+      animation
+    />
+
+  } else {
+    imagens = <View></View>
+  }
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <View style={styles.titleContainer}>
-
-        {console.log(florRecebida)}
 
         <Text style={styles.title} id="title">
           {florRecebida.scientificName}
         </Text>
       </View>
 
-      <View style={styles.imageContainer}>
-        <ScrollView
-          scrollEventThrottle={200}
-          decelerationRate="fast"
-          showsHorizontalScrollIndicator={true}
-          horizontal
-          pagingEnabled>
-          {florRecebida.images.map((images) => {
-            return (
-              <Image
-                key={images}
-                style={styles.image}
-                source={{ uri: images }}
-              />
-            );
+      {imagens}
 
-          })}
 
-        </ScrollView>
-      </View>
 
       <View style={styles.body} >
 
-        <Text style={styles.text} id="tag">
-          Nomes: {separaArray(florRecebida.names)}.
+
+        <Text style={styles.header}>
+          Nomes:
+        </Text>
+        <Text style={styles.text}>
+          {separaArray(florRecebida.names)}.
         </Text>
 
-        <Text style={styles.text}>Familia: {florRecebida.family}</Text>
+        <Text style={styles.header}>Familia:</Text>
+
+        <Text style={styles.text}>{florRecebida.family}</Text>
 
       </View>
 
       <View style={styles.bottomContainer}>
         <Text style={styles.bottomContainerText} id="tag">
-          Recursos Florais: {separaArray(florRecebida.flowerResources)}.
+          Recursos: {separaArray(florRecebida.flowerResources)}
         </Text>
       </View>
 

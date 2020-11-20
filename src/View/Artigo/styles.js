@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flex: 4,
     textAlign: "justify",
     fontSize: 16,
-    lineHeight: 24,
+    lineHeight: 20,
     paddingHorizontal: 2,
     margin: 30,
   },

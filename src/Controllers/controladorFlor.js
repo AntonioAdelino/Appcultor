@@ -1,4 +1,4 @@
-const raiz = "http://192.168.1.4:3001/api/flower/";
+const raiz = "http://173.82.232.87:3001/api/flower/";
 
 export default async function buscarFlor(texto) {
     /**

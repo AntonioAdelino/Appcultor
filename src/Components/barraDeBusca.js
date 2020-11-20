@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
         marginBottom: 0,
         backgroundColor: "#fff",
         flexWrap: "nowrap",
-        borderColor: "white",
+        borderColor: "#0f0f0f",
+        borderRightWidth: 0,
         borderWidth: 1,
     },
     button: {
@@ -31,8 +32,9 @@ const styles = StyleSheet.create({
         marginEnd: 2,
         justifyContent: "center",
         backgroundColor: "#fff",
-        borderColor: "gray",
-        borderWidth: 0.1
+        borderLeftWidth: 0,
+        borderColor: "#0f0f0f",
+        borderWidth: 1
     },
     image: {
         tintColor: "#000",

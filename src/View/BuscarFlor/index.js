@@ -48,11 +48,11 @@ export default class BuscarFlor extends React.Component {
    * Atualiza o andamento do carregamento
    */
     const { flores, carregando, erro, textoProcurado } = this.state;
+    this.setState({ erro: false, carregando: true })
 
     const { route } = this.props;
     let pesquisa = textoProcurado;
 
-    console.log("Busca")
 
     buscarFlor(pesquisa)
       .then(data => this.setState({ flores: data, carregando: false }))

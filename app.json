@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Appcultor-Mobile",
-    "slug": "Appcultor-Mobile",
+    "name": "Appcultor",
+    "slug": "Appcultor",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

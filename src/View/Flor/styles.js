@@ -3,14 +3,11 @@ import { StyleSheet, Dimensions } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: "100%",
-    width: "100%",
     paddingVertical: 0,
     paddingHorizontal: 0,
     elevation: 0,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   body: {
     margin: 10,
@@ -51,9 +48,18 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 17,
-    marginVertical: 2,
     color: "#4e4e4e",
-    // textAlign: "justify",
+    marginBottom: 16
+  },
+  header: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#292929",
+  },
+  line: {
+    height: 10,
+    width: Dimensions.get('window').width,
+    backgroundColor: "#f7b20d",
   },
   tags: {
     color: "#4e4e4e",

@@ -1,6 +1,6 @@
 export default async function carregarMenu() {
 
-    let raiz = "http://192.168.1.4:3001/api/tag/";
+    let raiz = "http://173.82.232.87:3001/api/tag/";
 
     //pesquisa de acordo com a raiz e operação escolhida
     return fetch(raiz)
