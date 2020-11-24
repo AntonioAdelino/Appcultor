@@ -46,6 +46,8 @@ export default class TelaInicial extends React.Component {
     const { navigation } = this.props;
     if (tag === "Flora apícola") {
       navigation.navigate("BuscarFlor");
+    } else if(tag === "Info"){
+      navigation.navigate("Info");
     } else {
       navigation.navigate("BuscarArtigo", { tag });
     }

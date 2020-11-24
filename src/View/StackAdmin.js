@@ -5,6 +5,7 @@ import Artigo from "./Artigo";
 import BuscarArtigo from "./BuscarArtigo";
 import BuscarFlor from "./BuscarFlor";
 import Flor from "./Flor";
+import Info from "./Info"
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,12 @@ export default function StackAdmin() {
       <Stack.Screen name="Flor"
         component={Flor}
       />
+
+      <Stack.Screen name="Info"
+        options={{
+          title: "Apoio",
+        }}
+        component={Info} />
     </Stack.Navigator>
   );
 }
