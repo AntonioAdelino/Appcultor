@@ -7,7 +7,7 @@ import styles from "./styles";
 let separaArray = (nomes) => nomes.join(", ");
 
 function validarNomeFlor(texto){
-  if(texto[0] == ""){
+  if(texto[0].trim() == null || texto[0].trim() == ""){
     return "Nenhum nome cadastrado"
   }else{
     return separaArray(texto);
@@ -53,7 +53,6 @@ export default function Flor({ route }) {
   }
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
       <ScrollView>
         <View style={styles.titleContainer}>
 

@@ -12,7 +12,7 @@ let separaTags = (tags) => tags.join(", ");
 
 
 function validarNomeFlor(texto){
-  if(texto[0] == ""){
+  if(texto[0].trim() == null || texto[0].trim() == ""){
     return "Nenhum nome cadastrado"
   }else{
     return separaTags(texto);
@@ -142,7 +142,6 @@ export default class BuscarFlor extends React.Component {
     //Tela Pincipal
     return (
       <View style={styles.container}>
-        <StatusBar style="auto" />
 
         <BarraDeBusca
           onChangeText={this.mudarTexto}

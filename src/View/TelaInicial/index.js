@@ -114,7 +114,7 @@ export default class TelaInicial extends React.Component {
             botao={() =>
               this.buscarArtigo(textoProcurado)}
           />
-          <StatusBar style="auto" />
+          <StatusBar style="light" />
 
           <FlatList
             style={styles.flatList}

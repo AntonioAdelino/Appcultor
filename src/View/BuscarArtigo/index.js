@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import BarraDeBusca from "../../Components/barraDeBusca";
 import styles from "./styles";
@@ -132,7 +132,7 @@ export default class BuscarArtigo extends React.Component {
 
     return (
       <View style={styles.container}>
-        <StatusBar style="auto" title={this.props.tag} />
+        <StatusBar style="light" title={this.props.tag} />
         <BarraDeBusca
           placeholder="Buscar artigo"
           onChangeText={this.mudarTexto}
