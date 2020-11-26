@@ -46,6 +46,16 @@ const styles = StyleSheet.create({
     height: 260,
     resizeMode: 'cover',
   },
+  imageCredits:{
+    flex: 1,
+    alignSelf: "flex-end"
+  },
+  imageCreditsText:{
+    fontSize: 10,
+    color: "#a2a2a2",
+    marginVertical: -10,
+    marginEnd: 5
+  },
   text: {
     fontSize: 17,
     color: "#4e4e4e",
