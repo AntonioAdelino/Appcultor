@@ -48,7 +48,9 @@ export default class TelaInicial extends React.Component {
       navigation.navigate("BuscarFlor");
     } else if(tag === "Info"){
       navigation.navigate("Info");
-    } else {
+    } else if(tag === "colaborações"){
+      navigation.navigate("Contribua");
+    }else {
       navigation.navigate("BuscarArtigo", { tag });
     }
 

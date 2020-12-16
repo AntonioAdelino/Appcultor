@@ -5,7 +5,8 @@ import Artigo from "./Artigo";
 import BuscarArtigo from "./BuscarArtigo";
 import BuscarFlor from "./BuscarFlor";
 import Flor from "./Flor";
-import Info from "./Info"
+import Info from "./Info";
+import Contribua from "./Contribua"
 
 const Stack = createStackNavigator();
 
@@ -54,6 +55,10 @@ export default function StackAdmin() {
           title: "Apoio",
         }}
         component={Info} />
+
+      <Stack.Screen name="Contribua"
+        component={Contribua}
+      />
     </Stack.Navigator>
   );
 }
