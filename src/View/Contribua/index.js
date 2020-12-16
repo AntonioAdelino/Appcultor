@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Linking, TouchableHighlight} from 'react-native';
+import { Alert, View, Text, Linking, TouchableHighlight} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { RadioButton } from 'react-native-paper';
 import styles from './styles'
@@ -9,6 +9,20 @@ export default function Contribua(){
     const [checked, setChecked] = React.useState('Comentário');
     const [nome, setNome] = React.useState('');
     const [comentario, setComentario] = React.useState('');
+
+    const navigationAlert= () =>
+        Alert.alert(
+            "Atenção",
+            "Você pode anexar imagens no e-mail",
+            [
+            { text: 'OK', onPress: handlePress }
+            ],
+            { cancelable: true }
+        );
+
+    const handlePress = () =>{
+        Linking.openURL(`mailto:support@example.com?subject=${checked} - App APPcultor&body=Nome do usuário:\n ${nome}\n\n${checked}:\n${comentario}`)}
+
 
     return(
         <View style={styles.container}>
@@ -69,9 +83,10 @@ export default function Contribua(){
 
             <TouchableHighlight 
                 style= {styles.botao}
-                onPress={() => 
-                    Linking.openURL(`mailto:support@example.com?subject=${checked}&body=Nome: ${nome}\b\n${comentario}`) }
-                    title="support@example.com" >
+                onPress={navigationAlert}
+                    // Linking.openURL(`mailto:support@example.com?subject=${checked}&body=Nome: ${nome}\b\n${comentario}`) }
+                    // title="support@example.com" 
+                    >
                     <Text>Enviar</Text>
             </TouchableHighlight>
             
