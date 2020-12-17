@@ -4,8 +4,10 @@ export default async function buscarArtigo(texto, tag) {
     * IP Server =   173.82.232.87
     * Porta 3001
     */
+   if(tag === "Glossário"){
+       return await buscarTodos();
+   }
 
-    console.log(`${texto} - ${tag}`)
     if (texto == null && tag != null) {
         return await buscarPorTag(tag)
 
@@ -25,11 +27,33 @@ export default async function buscarArtigo(texto, tag) {
         })
         return result
 
+    } else{
+        return await buscarTodos();
     }
 
 }
 //Ip para teste Local
 const raiz = "http://173.82.232.87:3001/api/article/";
+
+
+async function buscarTodos(){
+    return fetch(raiz)
+        .then(response => {
+            // valida se a requisição falhou
+            if (!response.ok) {
+                console.log(response.body)
+                return new Error('falhou a requisição') // cairá no catch da promise
+            }
+
+            // verificando pelo status
+            if (response.status === 404) {
+                return new Error('não encontrou qualquer resultado')
+            }
+
+            // retorna uma promise com os dados em JSON
+            return response.json()
+    })
+}
 
 
 async function buscarPorTexto(texto) {
