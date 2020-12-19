@@ -122,7 +122,7 @@ export default class BuscarArtigo extends React.Component {
           renderItem={({ item }) => (
             <ListItem title={item.title}
               type="artigo"
-              preview={item.content}
+              preview={item.content.replace(/<[^>]*>|&nbsp;|&rarr;|&larr;/g, '')}
               tags={`Tags: ${separaTags(item.tags)}`}
               onPress={() => this.navegar(item)} />
           )}
