@@ -7,11 +7,11 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     paddingHorizontal: 0,
     backgroundColor: "#fff",
-    alignItems: "center",
     justifyContent: "space-between",
     borderRadius: 0
   },
   titleContainer: {
+    flex: .1,
     margin: 0,
     backgroundColor: "#f7b20d",
     alignItems: "flex-start",
@@ -19,8 +19,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 20,
     alignSelf: "stretch",
-    flex: 1,
-    flexBasis: 125,
+    flexBasis: 30,
   },
   title: {
     alignContent: "center",
@@ -40,6 +39,7 @@ const styles = StyleSheet.create({
     margin: 30,
   },
   tagsContainer: {
+    flex: .1,
     flexDirection: "row",
     flex: 0,
     flexBasis: 45,

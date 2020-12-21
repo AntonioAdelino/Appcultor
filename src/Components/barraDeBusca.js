@@ -87,6 +87,9 @@ export default class BarraDeBusca extends React.Component {
                 <TextInput
                     style={styles.textInput}
                     onChangeText={this.props.onChangeText}
+                    returnKeyType={"search"}
+                    onSubmitEditing={() =>
+                        this.validarEntrada(this.props.botao)}
                     placeholder={this.props.placeholder}
                     value={this.props.value}
                 />
