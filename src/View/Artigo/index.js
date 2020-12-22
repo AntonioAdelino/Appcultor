@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Text, View } from "react-native";
-import { WebView } from 'react-native-webview';
+import { WebView } from "react-native-webview";
 import styles from "./styles";
 
 let separaTags = (tags) => tags.join(", ");
@@ -9,9 +9,13 @@ let separaTags = (tags) => tags.join(", ");
 export default function Artigo({ route }) {
   const artigoRecebido = route.params.artigo;
 
+  const title = `
+    ${artigoRecebido.title}
+  `;
+
   const html = `
       ${artigoRecebido.content}
-  `
+  `;
 
   const stylizedHtml = `
   <html lang="en">
@@ -31,6 +35,14 @@ export default function Artigo({ route }) {
         img{
             max-width: 100%;
         }
+        #title_container{
+          background-color: #f7b20d; 
+          margin-top: 0;
+          margin-bottom: 10px; 
+          padding-top: 10px;
+          padding-bottom: 10px; 
+          text-align: center;
+        }
       </style>
     
     </head>
@@ -38,6 +50,11 @@ export default function Artigo({ route }) {
     <body>
         <div class="container-fluid">
           <div class="row flex-xl-nowrap">
+            <div class="container mx-auto mt-0" id="title_container">
+              <h3 class="title" style="color: white;">
+                ${title}
+              </h3>
+            </div>
             <main class="col-12 col-md-12 col-xl-8 py-md-3 pl-md-5" role="main">
               ${html}
             </main>
@@ -53,18 +70,13 @@ export default function Artigo({ route }) {
     <View style={styles.container}>
       <StatusBar style="light" />
 
-      <View style={styles.titleContainer}>
-        <Text style={styles.title} id="title">
-          {artigoRecebido.title}
-        </Text>
-      </View>
 
       <WebView
         source={{
           html: stylizedHtml,
         }}
         androidHardwareAccelerationDisabled={true}
-        style={{ flex: 8, marginTop: 20 }}
+        style={{ flex: 8, marginTop: 0 }}
       />
 
       <View style={styles.tagsContainer}>

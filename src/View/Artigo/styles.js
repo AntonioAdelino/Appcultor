@@ -7,36 +7,8 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     paddingHorizontal: 0,
     backgroundColor: "#fff",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     borderRadius: 0
-  },
-  titleContainer: {
-    flex: .1,
-    margin: 0,
-    backgroundColor: "#f7b20d",
-    alignItems: "flex-start",
-    justifyContent: "flex-end",
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    alignSelf: "stretch",
-    flexBasis: 30,
-  },
-  title: {
-    alignContent: "center",
-    color: "#fff",
-    fontSize: 28,
-    fontWeight: "bold",
-  },
-  articleContainer: {
-    flex: 0,
-  },
-  article: {
-    flex: 4,
-    textAlign: "justify",
-    fontSize: 16,
-    lineHeight: 20,
-    paddingHorizontal: 2,
-    margin: 30,
   },
   tagsContainer: {
     flex: .1,
