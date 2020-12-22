@@ -21,7 +21,8 @@ export default function Contribua(){
         );
 
     const handlePress = () =>{
-        Linking.openURL(`mailto:support@example.com?subject=${checked} - App APPcultor&body=Nome do usuário:\n ${nome}\n\n${checked}:\n${comentario}`)}
+        Linking.openURL(`mailto:support@example.com?subject=${checked} - App Appcultor
+            &body=Nome do usuário:\n ${nome}\n\n${checked}:\n${comentario}`)}
 
 
     return(
@@ -40,7 +41,7 @@ export default function Contribua(){
                             onPress={() => setChecked('Comentário')}
                         />
 
-                        <Text style={styles.text}>Comentario sobre o aplicativo</Text>
+                        <Text style={styles.text}>Comentário sobre o aplicativo</Text>
                 </View>
 
 
@@ -48,18 +49,17 @@ export default function Contribua(){
 
                 <View style={styles.radioButtonContainer}>
                     <RadioButton
-                        style ={styles.radioButton}
                         value="Conteudo"
                         color= "#f7b20d"
                         status={ checked === 'Conteudo' ? 'checked' : 'unchecked' }
                         onPress={() => setChecked('Conteudo')}
                     />
-                    <Text style={styles.text}>Contribuição em conteudo</Text>
+                    <Text style={styles.text}>Contribuição em conteúdo</Text>
                 </View>
 
             </View>
 
-            <View>
+            <View style={{flex: 2}}>
                 <Text style={styles.title}>{checked}:</Text>
                 <TextInput
                     style={styles.inputComentario}
@@ -71,7 +71,7 @@ export default function Contribua(){
                 />
             </View>
 
-            <View>
+            <View style={{flex: 1, marginVertical: 4, }}>
                 <Text style={styles.title}>Nome: </Text>
                 <TextInput
                     value={nome}
@@ -83,11 +83,8 @@ export default function Contribua(){
 
             <TouchableHighlight 
                 style= {styles.botao}
-                onPress={navigationAlert}
-                    // Linking.openURL(`mailto:support@example.com?subject=${checked}&body=Nome: ${nome}\b\n${comentario}`) }
-                    // title="support@example.com" 
-                    >
-                    <Text>Enviar</Text>
+                onPress={navigationAlert} >
+                    <Text style={{color: "#fff"}}>Enviar</Text>
             </TouchableHighlight>
             
             

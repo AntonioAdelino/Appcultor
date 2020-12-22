@@ -3,35 +3,25 @@ import {StyleSheet} from 'react-native'
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        padding: 15,
+        padding: 10,
         backgroundColor: "#f9f9ff",
         justifyContent: "space-between",
-        alignItems: "flex-start"
+        alignItems: "stretch"
     },
     containerSelecao:{
         flex: 0,
         width: 300,
-        height: 50
+        height: 100
 
     },
-    radioButton:{
-        flex: 0,
-        flexGrow: 0,
-        flexDirection: "column",
-        width: 10,
-        height: 10,
-        
-    },
     radioButtonContainer:{
+        flex:1,
         flexDirection:"row",
         alignItems:'center'
 
     },
     inputComentario:{
-        flex: 3,
-        width: 300,
-        minHeight:80,
-        maxHeight: 200,
+        flex: 2,
         padding: 6,
         borderRadius: 1,
         borderWidth: 2,
@@ -42,10 +32,7 @@ const styles = StyleSheet.create({
         textAlignVertical: 'top'
     },
     inputNome:{
-        flex: 0.5,
-        width: 300,
-        minHeight:40,
-        maxHeight: 60,
+        flex: 0,
         padding: 6,
         borderRadius: 1,
         borderWidth: 2,
@@ -58,6 +45,8 @@ const styles = StyleSheet.create({
         textAlign: "left"
     },
     title:{
+        flex: 0,
+        flexWrap:"nowrap",
         fontSize: 18,
         color:"#f7b20df5"
     },
