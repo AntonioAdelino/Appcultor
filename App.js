@@ -3,11 +3,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import StackAdmin from "./src/View/StackAdmin";
+import {Provider} from 'react-native-paper';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <StackAdmin />
+      <Provider>
+        <StackAdmin />
+      </Provider>
     </NavigationContainer>
   );
 }

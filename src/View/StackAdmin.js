@@ -7,6 +7,7 @@ import BuscarFlor from "./BuscarFlor";
 import Flor from "./Flor";
 import Info from "./Info";
 import Contribua from "./Contribua"
+import MenuTelaInicial from '../Components/menuTelaInicial';
 
 const Stack = createStackNavigator();
 
@@ -29,7 +30,9 @@ export default function StackAdmin() {
         component={Home}
         options={{
           title: 'Appcultor',
-
+          headerRight: () => (
+              <MenuTelaInicial/>
+          ),
         }} />
       <Stack.Screen name="Artigo"
         component={Artigo}
