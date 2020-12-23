@@ -5,7 +5,7 @@ import { RadioButton } from 'react-native-paper';
 import styles from './styles'
 
 
-export default function Contribua(){
+export default function Colabore(){
     const [checked, setChecked] = React.useState('Comentário');
     const [nome, setNome] = React.useState('');
     const [comentario, setComentario] = React.useState('');

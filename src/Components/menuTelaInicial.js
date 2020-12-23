@@ -38,7 +38,7 @@ const MenuTelaInicial = () => {
           />
         }
       >
-        <Menu.Item onPress={() => navegar("Contribua")} title="Contribua" />
+        <Menu.Item onPress={() => navegar("Colabore")} title="Colabore" />
         <Divider />
         <Menu.Item onPress={() => navegar("Info")} title="Informações" />
         
@@ -49,16 +49,3 @@ const MenuTelaInicial = () => {
 
 export default MenuTelaInicial;
 
-{
-  /* <IconButton
-    icon="dots-vertical"
-    color={"#fff"}
-    size={24}
-    onPress={() => alert('Pressed')}
-/> */
-}
-
-// function navegar (destino){
-//     navigation.navigate(destino)
-//     closeMenu;
-//   }

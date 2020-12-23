@@ -6,7 +6,7 @@ import BuscarArtigo from "./BuscarArtigo";
 import BuscarFlor from "./BuscarFlor";
 import Flor from "./Flor";
 import Info from "./Info";
-import Contribua from "./Contribua"
+import Colabore from "./Colabore"
 import MenuTelaInicial from '../Components/menuTelaInicial';
 
 const Stack = createStackNavigator();
@@ -59,8 +59,8 @@ export default function StackAdmin() {
         }}
         component={Info} />
 
-      <Stack.Screen name="Contribua"
-        component={Contribua}
+      <Stack.Screen name="Colabore"
+        component={Colabore}
       />
     </Stack.Navigator>
   );
