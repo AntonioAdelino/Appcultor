@@ -7,7 +7,7 @@ import styles from "./styles";
 let separaArray = (nomes) => nomes.join(", ");
 
 function validarNomeFlor(texto){
-  if(texto[0].trim() == null || texto[0].trim() == ""){
+  if(!texto[0]){
     return "Nenhum nome cadastrado"
   }else{
     return separaArray(texto);

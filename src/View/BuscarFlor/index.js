@@ -12,7 +12,7 @@ let separaTags = (tags) => tags.join(", ");
 
 
 function validarNomeFlor(texto){
-  if(texto[0].trim() == null || texto[0].trim() == ""){
+  if(!texto[0]){
     return "Nenhum nome cadastrado"
   }else{
     return separaTags(texto);
@@ -130,7 +130,7 @@ export default class BuscarFlor extends React.Component {
           renderItem={({ item }) => (
             <ListItem title={`${validarNomeFlor(item.names)}`}
               type="flor"
-              imagem={{ uri: 'http://chaves.rcpol.org.br/resized/eco-0B0nUXAibCfVGaG16V25lelljMHM.jpeg' }}
+              imagem={{ uri: item.images[0] }}
               preview={item.scientificName}
               tags={`Recursos Florais: ${separaTags(item.flowerResources)}`}
               onPress={() => this.navegar(item)} />
