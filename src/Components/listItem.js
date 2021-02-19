@@ -47,9 +47,6 @@ const styles = StyleSheet.create({
 
   },
   scientificName: {
-    fontSize: 10,
-    color: "#4e4e4e",
-    marginBottom: 5,
     fontStyle: "italic"
 
   },
@@ -88,8 +85,8 @@ export default class ListItem extends React.Component {
             style={styles.logo}
             source={imagem} />
           <View style={styles.Artigo}>
-            <Text style={styles.title}>{this.props.title}</Text>
-            <Text numberOfLines={2} style={styles.scientificName}>{this.props.preview}</Text>
+            <Text style={styles.title}><Text style={styles.scientificName}>{this.props.title}</Text> (autor)</Text>
+            <Text numberOfLines={1} style={styles.preview}>{this.props.preview}</Text>
             <Text style={styles.tags}>{this.props.tags}</Text>
           </View>
         </TouchableOpacity>

@@ -19,6 +19,16 @@ function validarNomeFlor(texto){
   }
 }
 
+function compare(a, b){
+  if ( a.scientificName < b.scientificName ){
+    return -1;
+  }
+  if ( a.scientificName > b.scientificName ){
+    return 1;
+  }
+  return 0;
+}
+
 
 export default class BuscarFlor extends React.Component {
   constructor(props) {
@@ -65,7 +75,10 @@ export default class BuscarFlor extends React.Component {
 
 
     buscarFlor(pesquisa)
-      .then(data => this.setState({ flores: data, carregando: false }))
+      .then(data => {
+        const floresOrdenadas = data.sort(compare);
+        this.setState({ flores: floresOrdenadas, carregando: false })
+      })
       .catch(erro => this.setState({ erro: erro, carregando: false }))
   }
 
@@ -121,17 +134,19 @@ export default class BuscarFlor extends React.Component {
 
     let resultadoDaBusca;
     if (flores.length == 0) {
-      resultadoDaBusca = <TelaDeErro mensagem={"Nenhuma flor encontrada\nVerifique sua busca e tente novamente"} />
+      resultadoDaBusca = <TelaDeErro mensagem={"Nenhuma flor encontrada.\nVerifique sua busca e tente novamente."} />
     } else {
       resultadoDaBusca =
         <FlatList
           style={styles.flatList}
           data={flores}
           renderItem={({ item }) => (
-            <ListItem title={`${validarNomeFlor(item.names)}`}
+            <ListItem 
+              title={item.scientificName}
               type="flor"
               imagem={{ uri: item.images[0] }}
-              preview={item.scientificName}
+              preview={item.names}
+              author={item.author}
               tags={`Recursos Florais: ${separaTags(item.flowerResources)}`}
               onPress={() => this.navegar(item)} />
           )}

@@ -112,7 +112,7 @@ export default class BuscarArtigo extends React.Component {
 
     let resultadoDaBusca;
     if (artigos.length == 0) {
-      resultadoDaBusca = <TelaDeErro mensagem={"Nenhum resultado, \nVerifique sua busca"} />
+      resultadoDaBusca = <TelaDeErro mensagem={"Nenhum resultado encontrado. \nVerifique sua busca."} />
 
     } else {
       resultadoDaBusca =
