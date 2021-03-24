@@ -8,6 +8,7 @@ import Flor from "./Flor";
 import Info from "./Info";
 import Colabore from "./Colabore"
 import MenuTelaInicial from '../Components/menuTelaInicial';
+import LuzVermelha from "./LuzVermelha";
 
 const Stack = createStackNavigator();
 
@@ -61,6 +62,15 @@ export default function StackAdmin() {
 
       <Stack.Screen name="Colabore"
         component={Colabore}
+      />
+      <Stack.Screen name="Luz Vermelha"
+        options={{
+          headerStyle: {
+            backgroundColor: '#f00',
+            elevation: 0
+          }
+        }}
+        component={LuzVermelha}
       />
     </Stack.Navigator>
   );
