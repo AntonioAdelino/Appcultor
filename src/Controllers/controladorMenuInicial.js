@@ -1,6 +1,8 @@
+import config from "../Config";
+
 export default async function carregarMenu() {
 
-    let raiz = "http://173.82.232.87:3001/api/tag/";
+    let raiz = `${config.SERVER_ADRESS}api/tag/`;
 
     //pesquisa de acordo com a raiz e operação escolhida
     return fetch(raiz)
