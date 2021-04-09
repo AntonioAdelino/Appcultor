@@ -1,4 +1,6 @@
-const raiz = "http://173.82.232.87:3001/api/flower/";
+import config from "../Config";
+
+const raiz = `${config.SERVER_ADRESS}api/flower/`;
 
 export default async function buscarFlor(texto) {
     /**

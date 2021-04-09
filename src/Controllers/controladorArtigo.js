@@ -1,3 +1,5 @@
+import config from "../Config";
+
 export default async function buscarArtigo(texto, tag) {
     /*
     * Controller para tratamento solicitações ao server relacionadas aos artigos.
@@ -33,7 +35,7 @@ export default async function buscarArtigo(texto, tag) {
 
 }
 //Ip para teste Local
-const raiz = "http://173.82.232.87:3001/api/article/";
+const raiz = `${config.SERVER_ADRESS}api/article/`;
 
 
 async function buscarTodos(){
