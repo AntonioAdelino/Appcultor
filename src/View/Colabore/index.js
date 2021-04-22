@@ -9,6 +9,7 @@ export default function Colabore(){
     const [checked, setChecked] = React.useState('Comentário');
     const [nome, setNome] = React.useState('');
     const [comentario, setComentario] = React.useState('');
+    const email = "marcelo.milfont@ufape.edu.br";
 
     const navigationAlert= () =>
         Alert.alert(
@@ -21,7 +22,7 @@ export default function Colabore(){
         );
 
     const handlePress = () =>{
-        Linking.openURL(`mailto:support@example.com?subject=${checked} - App Appcultor
+        Linking.openURL(`mailto:${email}?subject=${checked} - App Appcultor
             &body=Nome do usuário:\n ${nome}\n\n${checked}:\n${comentario}`)}
 
 
