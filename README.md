@@ -10,7 +10,11 @@ O **Appcultor** é um aplicativo mobile desenvolvido para auxiliar apicultores n
 
 > ### Tecnologias Usadas
 O **Appcultor** foi desenvolvido na linguagem de programação [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript), usando a biblioteca [React Native](https://reactnative.dev/
-). O servidor deste aplicativo foi escrito em [TypeScript](https://www.typescriptlang.org/) e você consegue ter acesso a repositório dele clicando [aqui](https://github.com/AntonioAdelino/Appcultor-Servidor).
+).
+
+O servidor deste aplicativo foi desenvolvido na linguagem de programação [TypeScript](https://www.typescriptlang.org/) e você consegue ter acesso ao repositório dele clicando [aqui](https://github.com/AntonioAdelino/Appcultor-Servidor).
+
+O site responsável pelo gerenciamento dos dados usados por este aplicativo foi desenvolvido na linguagem de programação [PHP](https://www.php.net/), usando o framework [Laravel](https://laravel.com/) e você consegue ter acesso ao repositório dele clicando [aqui](https://github.com/Dev-App-Veterinaria/App-Veterinaria).
 
 > ### Desenvolvedores do Aplicativo
 
