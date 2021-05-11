@@ -1,4 +1,4 @@
-![Appcultor](https://i.imgur.com/oZSvhoM.png)
+![Appcultor](https://i.imgur.com/bIOrbhR.png)
 # Bem vindo ao **Appcultor**!
 
 > ### Mas afinal, o que é o Appcultor?
